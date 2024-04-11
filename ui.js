@@ -5,7 +5,9 @@ import {
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
-function makeHtmlBoard(game) {
+function makeHtmlBoard(connectFourGame) {
+  console.log("makeHtmlBoard", {"this": this, connectFourGame});
+
   const $htmlBoard = document.querySelector("#board");
 
   // create top row of game to hold clickable cells
@@ -13,10 +15,10 @@ function makeHtmlBoard(game) {
   $top.setAttribute("id", "column-top");
 
   // fill top row with clickable cells
-  for (let x = 0; x < game.width; x++) {
+  for (let x = 0; x < connectFourGame.width; x++) {
     const $headCell = document.createElement("td");
     $headCell.setAttribute("id", `top-${x}`);
-    $headCell.addEventListener("click", handleClick); //TODO: use bind here?
+    $headCell.addEventListener("click", handleClick.bind(connectFourGame)); //TODO: use bind here?
     $top.append($headCell);
   }
   $htmlBoard.append($top);
@@ -24,10 +26,10 @@ function makeHtmlBoard(game) {
   // dynamically creates the main part of html board
   // uses HEIGHT to create table rows
   // uses WIDTH to create table cells for each row
-  for (let y = 0; y < game.height; y++) {
+  for (let y = 0; y < connectFourGame.height; y++) {
     const $row = document.createElement('tr');
 
-    for (let x = 0; x < game.width; x++) {
+    for (let x = 0; x < connectFourGame.width; x++) {
       const $cell = document.createElement('td');
       $cell.setAttribute('id', `c-${y}-${x}`);
       $row.append($cell);
@@ -41,9 +43,11 @@ function makeHtmlBoard(game) {
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
+  console.log("placeInTable", {"this": this});
+
   const $piece = document.createElement('div');
   $piece.classList.add('piece');
-  $piece.classList.add(`p${gameState.currPlayer}`);
+  $piece.classList.add(`p${this.currPlayer}`);
 
   const $spot = document.querySelector(`#c-${y}-${x}`);
   $spot.append($piece);
@@ -59,40 +63,43 @@ function endGame(msg) {
 
 /** handleClick: handle click of column top to play piece */
 
-function handleClick(evt, game) {
+function handleClick(evt) {
+  console.log("handleClick", {"this": this});
+
   // get x from ID of clicked cell
   const x = Number(evt.target.id.slice("top-".length));
 
   // get next spot in column (if none, ignore click)
-  const y = game.findSpotInCol(x);
+  const y = this.findSpotInCol(x);
   if (y === null) {
     return;
   }
 
   // place piece in board and add to HTML table
-  game.board[y][x] = currPlayer;
-  placeInTable(y, x);
+  this.board[y][x] = this.currPlayer;
+  placeInTable.bind(this)(y, x);
 
   // check for win
-  if (checkForWin()) {
-    return endGame(`Player ${game.currPlayer} won!`);
+  if (this.checkForWin()) {
+    return endGame(`Player ${this.currPlayer} won!`);
   }
 
   // check for tie: if top row is filled, board is filled
-  if (board[0].every(cell => cell !== null)) {
+  if (this.board[0].every(cell => cell !== null)) {
     return endGame('Tie!');
   }
 
-  game.switchCurrPlayer();
+  this.switchCurrPlayer();
 }
 
 
 /** Start game. */
 
 function start() {
-  const game = new Game(6, 7);
-  makeHtmlBoard(game);
-}
+  console.log("start")
 
+  const connectFourGame = new Game(6, 7);
+  makeHtmlBoard(connectFourGame);
+}
 
 export { start };
