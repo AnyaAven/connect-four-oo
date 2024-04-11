@@ -5,9 +5,7 @@ import {
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
-function makeHtmlBoard(connectFourGame) {
-  console.log("makeHtmlBoard", {"this": this, connectFourGame});
-
+function makeHtmlBoard() {
   const $htmlBoard = document.querySelector("#board");
 
   // create top row of game to hold clickable cells
@@ -18,7 +16,7 @@ function makeHtmlBoard(connectFourGame) {
   for (let x = 0; x < connectFourGame.width; x++) {
     const $headCell = document.createElement("td");
     $headCell.setAttribute("id", `top-${x}`);
-    $headCell.addEventListener("click", handleClick.bind(connectFourGame));
+    $headCell.addEventListener("click", handleClick);
     $top.append($headCell);
   }
   $htmlBoard.append($top);
@@ -47,7 +45,7 @@ function placeInTable(y, x) {
 
   const $piece = document.createElement('div');
   $piece.classList.add('piece');
-  $piece.classList.add(`p${this.currPlayer}`);
+  $piece.classList.add(`p${connectFourGame.currPlayer}`);
 
   const $spot = document.querySelector(`#c-${y}-${x}`);
   $spot.append($piece);
@@ -64,41 +62,41 @@ function endGame(msg) {
 /** handleClick: handle click of column top to play piece */
 
 function handleClick(evt) {
-  console.log("handleClick", {"this": this});
-
   // get x from ID of clicked cell
   const x = Number(evt.target.id.slice("top-".length));
 
   // get next spot in column (if none, ignore click)
-  const y = this.findSpotInCol(x);
+  const y = connectFourGame.findSpotInCol(x);
   if (y === null) {
     return;
   }
 
   // place piece in board and add to HTML table
-  this.board[y][x] = this.currPlayer;
-  placeInTable.bind(this)(y, x);
+  connectFourGame.board[y][x] = connectFourGame.currPlayer;
+  placeInTable(y, x);
 
   // check for win
-  if (this.checkForWin()) {
-    return endGame(`Player ${this.currPlayer} won!`);
+  if (connectFourGame.checkForWin()) {
+    return endGame(`Player ${connectFourGame.currPlayer} won!`);
   }
 
   // check for tie: if top row is filled, board is filled
-  if (this.board[0].every(cell => cell !== null)) {
+  if (connectFourGame.board[0].every(cell => cell !== null)) {
     return endGame('Tie!');
   }
 
-  this.switchCurrPlayer();
+  connectFourGame.switchCurrPlayer();
 }
 
+
+let connectFourGame;
 
 /** Start game. */
 
 function start() {
   console.log("start")
 
-  const connectFourGame = new Game(6, 7); //FIXME: Make global
+  connectFourGame = new Game(6, 7);
   makeHtmlBoard(connectFourGame);
 }
 
