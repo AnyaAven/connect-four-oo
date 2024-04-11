@@ -57,6 +57,10 @@ function placeInTable(y, x) {
 
 function endGame(msg) {
   alert(msg);
+  const $topRow = document.querySelector('#column-top');
+  for(let cell of $topRow.children){
+    cell.removeEventListener("click", handleClick);
+  }
 }
 
 
