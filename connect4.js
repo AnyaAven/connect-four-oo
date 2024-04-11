@@ -22,7 +22,7 @@ class Game {
   }
 
 
-  /** makeBoard: fill in global `board`: //FIXME:
+  /** makeBoard: fill in connect four `board`:
    *    board = array of rows, each row is array of cells  (board[y][x])
   */
 
@@ -56,7 +56,22 @@ class Game {
   /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
   checkForWin() {
-
+    
+  // Check four cells to see if they're all color of current player
+  // (cells: list of four (y, x) cells),
+  // returns true if all are legal coordinates & all match currPlayer
+    const _win = (cells) => {
+      return cells.every(
+        ([y, x]) =>
+          y >= 0 &&
+          y < this.height &&
+          x >= 0 &&
+          x < this.width &&
+          this.board[y][x] === this.currPlayer
+      );
+    }
+    
+    
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
         // get "checklist" of 4 cells (starting here) for each of the different
@@ -67,7 +82,7 @@ class Game {
         const diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
 
         // find winner (only checking each win-possibility as needed)
-        if (this._win(horiz) || this._win(vert) || this._win(diagDR) || this._win(diagDL)) {
+        if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
           return true;
         }
       }
@@ -75,22 +90,7 @@ class Game {
 
     return false;
   }
-
-  //FIXME: move _win into checkForWin();
-  /** Check four cells to see if they're all color of current player
-   * (cells: list of four (y, x) cells),
-   * returns true if all are legal coordinates & all match currPlayer
-   */
-  _win(cells) {
-    return cells.every(
-      ([y, x]) =>
-        y >= 0 &&
-        y < this.height &&
-        x >= 0 &&
-        x < this.width &&
-        this.board[y][x] === this.currPlayer
-    );
-  }
+  
 
 }
 
