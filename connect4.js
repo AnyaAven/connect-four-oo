@@ -11,6 +11,8 @@ class Game {
     this.width = width;
     this.currPlayer = 1;
     this.board = this.makeBoard();
+
+    this.gameOver = false;
   }
 
   /** switchCurrPlayer:
@@ -56,7 +58,7 @@ class Game {
   /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
   checkForWin() {
-    
+
   // Check four cells to see if they're all color of current player
   // (cells: list of four (y, x) cells),
   // returns true if all are legal coordinates & all match currPlayer
@@ -70,8 +72,8 @@ class Game {
           this.board[y][x] === this.currPlayer
       );
     }
-    
-    
+
+
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
         // get "checklist" of 4 cells (starting here) for each of the different
@@ -90,7 +92,7 @@ class Game {
 
     return false;
   }
-  
+
 
 }
 

@@ -57,16 +57,15 @@ function placeInTable(y, x) {
 
 function endGame(msg) {
   alert(msg);
-  const $topRow = document.querySelector('#column-top');
-  for(let cell of $topRow.children){
-    cell.removeEventListener("click", handleClick);
-  }
+  connectFourGame.gameOver = true
 }
 
 
 /** handleClick: handle click of column top to play piece */
 
 function handleClick(evt) {
+  if(connectFourGame.gameOver) return;
+
   // get x from ID of clicked cell
   const x = Number(evt.target.id.slice("top-".length));
 
