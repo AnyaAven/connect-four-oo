@@ -6,14 +6,10 @@
  */
 
 class Game {
-  constructor(height, width) {
+  constructor(height = 6, width = 7) {
     this.height = height;
     this.width = width;
-
-    //TODO: do we need this?
     this.currPlayer = 1;
-
-    //TODO: does this work as we intended?
     this.board = this.makeBoard();
   }
 
@@ -80,16 +76,15 @@ class Game {
     return false;
   }
 
-  //TODO: Can this helper function be OUTSIDE of checkForWin?
+  /** Check four cells to see if they're all color of current player
+   * (cells: list of four (y, x) cells),
+   * returns true if all are legal coordinates & all match currPlayer
+   */
   _win(cells) {
-    // Check four cells to see if they're all color of current player
-    //  - cells: list of four (y, x) cells
-    //  - returns true if all are legal coordinates & all match currPlayer
-
     return cells.every(
       ([y, x]) =>
         y >= 0 &&
-        y < this.height && //TODO: do we lose reference of this here?
+        y < this.height &&
         x >= 0 &&
         x < this.width &&
         this.board[y][x] === this.currPlayer
