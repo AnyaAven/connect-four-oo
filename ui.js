@@ -98,7 +98,7 @@ function handleClick(evt) {
 function start() {
   console.log("start")
 
-  const connectFourGame = new Game(6, 7);
+  const connectFourGame = new Game(6, 7); //FIXME: Make global
   makeHtmlBoard(connectFourGame);
 }
 

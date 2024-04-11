@@ -22,7 +22,7 @@ class Game {
   }
 
 
-  /** makeBoard: fill in global `board`:
+  /** makeBoard: fill in global `board`: //FIXME:
    *    board = array of rows, each row is array of cells  (board[y][x])
   */
 
@@ -76,6 +76,7 @@ class Game {
     return false;
   }
 
+  //FIXME: move _win into checkForWin();
   /** Check four cells to see if they're all color of current player
    * (cells: list of four (y, x) cells),
    * returns true if all are legal coordinates & all match currPlayer
