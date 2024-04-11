@@ -18,7 +18,7 @@ function makeHtmlBoard(connectFourGame) {
   for (let x = 0; x < connectFourGame.width; x++) {
     const $headCell = document.createElement("td");
     $headCell.setAttribute("id", `top-${x}`);
-    $headCell.addEventListener("click", handleClick.bind(connectFourGame)); //TODO: use bind here?
+    $headCell.addEventListener("click", handleClick.bind(connectFourGame));
     $top.append($headCell);
   }
   $htmlBoard.append($top);
