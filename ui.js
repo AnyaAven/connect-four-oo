@@ -7,6 +7,7 @@ import {
 
 function makeHtmlBoard() {
   const $htmlBoard = document.querySelector("#board");
+  $htmlBoard.innerHTML = '';
 
   // create top row of game to hold clickable cells
   const $top = document.createElement("tr");
@@ -93,11 +94,16 @@ let connectFourGame;
 
 /** Start game. */
 
+function startGame(evt){
+  evt.preventDefault();
+  connectFourGame = new Game(6, 7);
+  makeHtmlBoard();
+}
+
 function start() {
   console.log("start")
-
-  connectFourGame = new Game(6, 7);
-  makeHtmlBoard(connectFourGame);
+  const startBtn = document.querySelector('#start-game');
+  startBtn.addEventListener('click', startGame);
 }
 
 export { start };
