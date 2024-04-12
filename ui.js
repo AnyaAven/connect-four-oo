@@ -97,8 +97,6 @@ function handleClick(evt) {
 
 
 let connectFourGame;
-let player1;
-let player2;
 
 /** Start game. */
 
@@ -106,8 +104,8 @@ function startGame(evt) {
   evt.preventDefault();
   const color1 = document.querySelector("#player-1").value;
   const color2 = document.querySelector("#player-2").value;
-  player1 = new Player(color1);
-  player2 = new Player(color2);
+  const player1 = new Player(color1);
+  const player2 = new Player(color2);
 
   connectFourGame = new Game(player1, player2, 6, 7);
 
