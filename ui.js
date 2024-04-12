@@ -43,7 +43,7 @@ function makeHtmlBoard() {
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
-  console.log("placeInTable", { "this": this });
+  console.log("placeInTable", {y, x});
 
   const $piece = document.createElement('div');
   $piece.classList.add('piece');
@@ -57,6 +57,8 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 
 function endGame(msg) {
+  console.log("endGame", msg);
+  
   alert(msg);
   connectFourGame.gameOver = true;
 }
