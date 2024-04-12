@@ -9,7 +9,7 @@ class Game {
   constructor(player1 = "red", player2 = "blue", height = 6, width = 7) {
     this.height = height;
     this.width = width;
-    this.player1 = player1;
+    this.player1 = player1; //TODO: don't create players by default
     this.player2 = player2;
     this.currPlayer = player1;
     this.board = this.makeBoard();
