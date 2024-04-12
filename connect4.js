@@ -48,6 +48,8 @@ class Game {
    */
 
   findSpotInCol(x) {
+    console.log("findSpotInCol", x);
+    
     for (let y = this.height - 1; y >= 0; y--) {
       if (this.board[y][x] === null) {
         return y;
@@ -66,6 +68,8 @@ class Game {
     // (cells: list of four (y, x) cells),
     // returns true if all are legal coordinates & all match currPlayer
     const _win = (cells) => {
+      console.log("_win", cells);
+      
       return cells.every(
         ([y, x]) =>
           y >= 0 &&
@@ -99,11 +103,11 @@ class Game {
 
 }
 
+/** Player class, sets custom color from form */
 class Player {
   constructor(color) {
     this.color = color;
   }
-
 }
 
 export {
