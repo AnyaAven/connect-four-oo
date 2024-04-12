@@ -6,10 +6,12 @@
  */
 
 class Game {
-  constructor(height = 6, width = 7) {
+  constructor(height = 6, width = 7, player1 = "red", player2 = "blue") {
     this.height = height;
     this.width = width;
-    this.currPlayer = 1;
+    this.player1 = player1;
+    this.player2 = player2;
+
     this.board = this.makeBoard();
 
     this.gameOver = false;
@@ -18,7 +20,7 @@ class Game {
   /** switchCurrPlayer:
    *   checks the value of currPlayer and swaps the value to the other
    *   player instance
-   */
+   */ //FIXME:
   switchCurrPlayer() {
     this.currPlayer = this.currPlayer === 1 ? 2 : 1;
   }
@@ -96,7 +98,14 @@ class Game {
 
 }
 
+class Player {
+  constructor(color){
+    this.color = color;
+  }
+
+}
 
 export {
-  Game
+  Game,
+  Player
 };
