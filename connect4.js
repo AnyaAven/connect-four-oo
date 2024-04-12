@@ -6,7 +6,7 @@
  */
 
 class Game {
-  constructor(height = 6, width = 7, player1 = "red", player2 = "blue") {
+  constructor(player1 = "red", player2 = "blue", height = 6, width = 7) {
     this.height = height;
     this.width = width;
     this.player1 = player1;
@@ -21,9 +21,9 @@ class Game {
    *   player instance
    */
   switchCurrPlayer() {
-    this.currPlayer = this.currPlayer === this.player1 
-    ? this.player2 
-    : this.player1;
+    this.currPlayer = this.currPlayer === this.player1
+      ? this.player2
+      : this.player1;
   }
 
 
@@ -62,9 +62,9 @@ class Game {
 
   checkForWin() {
 
-  // Check four cells to see if they're all color of current player
-  // (cells: list of four (y, x) cells),
-  // returns true if all are legal coordinates & all match currPlayer
+    // Check four cells to see if they're all color of current player
+    // (cells: list of four (y, x) cells),
+    // returns true if all are legal coordinates & all match currPlayer
     const _win = (cells) => {
       return cells.every(
         ([y, x]) =>
@@ -74,7 +74,7 @@ class Game {
           x < this.width &&
           this.board[y][x] === this.currPlayer
       );
-    }
+    };
 
 
     for (let y = 0; y < this.height; y++) {
@@ -100,7 +100,7 @@ class Game {
 }
 
 class Player {
-  constructor(color){
+  constructor(color) {
     this.color = color;
   }
 

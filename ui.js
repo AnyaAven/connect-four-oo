@@ -43,7 +43,7 @@ function makeHtmlBoard() {
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
-  console.log("placeInTable", {"this": this});
+  console.log("placeInTable", { "this": this });
 
   const $piece = document.createElement('div');
   $piece.classList.add('piece');
@@ -58,14 +58,14 @@ function placeInTable(y, x) {
 
 function endGame(msg) {
   alert(msg);
-  connectFourGame.gameOver = true
+  connectFourGame.gameOver = true;
 }
 
 
 /** handleClick: handle click of column top to play piece */
 
 function handleClick(evt) {
-  if(connectFourGame.gameOver) return;
+  if (connectFourGame.gameOver) return;
 
   // get x from ID of clicked cell
   const x = Number(evt.target.id.slice("top-".length));
@@ -100,20 +100,20 @@ let player2;
 
 /** Start game. */
 
-function startGame(evt){
+function startGame(evt) {
   evt.preventDefault();
   const color1 = document.querySelector("#player-1").value;
   const color2 = document.querySelector("#player-2").value;
   player1 = new Player(color1);
   player2 = new Player(color2);
 
-  connectFourGame = new Game(6, 7, player1, player2);
+  connectFourGame = new Game(player1, player2, 6, 7);
 
   makeHtmlBoard();
 }
 
 function start() {
-  console.log("start")
+  console.log("start");
   const startBtn = document.querySelector('#start-game');
   startBtn.addEventListener('click', startGame);
 }
