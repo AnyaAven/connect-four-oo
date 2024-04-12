@@ -47,7 +47,7 @@ function placeInTable(y, x) {
 
   const $piece = document.createElement('div');
   $piece.classList.add('piece');
-  $piece.classList.add(`p${connectFourGame.currPlayer}`);
+  $piece.style.backgroundColor = connectFourGame.currPlayer.color;
 
   const $spot = document.querySelector(`#c-${y}-${x}`);
   $spot.append($piece);
@@ -82,7 +82,7 @@ function handleClick(evt) {
 
   // check for win
   if (connectFourGame.checkForWin()) {
-    return endGame(`Player ${connectFourGame.currPlayer} won!`);
+    return endGame(`${connectFourGame.currPlayer.color} won!`);
   }
 
   // check for tie: if top row is filled, board is filled

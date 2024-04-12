@@ -11,18 +11,19 @@ class Game {
     this.width = width;
     this.player1 = player1;
     this.player2 = player2;
-
+    this.currPlayer = player1;
     this.board = this.makeBoard();
-
     this.gameOver = false;
   }
 
   /** switchCurrPlayer:
    *   checks the value of currPlayer and swaps the value to the other
    *   player instance
-   */ //FIXME:
+   */
   switchCurrPlayer() {
-    this.currPlayer = this.currPlayer === 1 ? 2 : 1;
+    this.currPlayer = this.currPlayer === this.player1 
+    ? this.player2 
+    : this.player1;
   }
 
 
